@@ -11,7 +11,7 @@ from model_manager import ModelManager
 st.sidebar.image("https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/512px-React-icon.svg.png", width=80)
 st.sidebar.title("🧠 Medical NLP App")
 st.sidebar.markdown("Built by **Dr. Alelyani**")
-st.sidebar.markdown("📧 [Contact on LinkedIn](https://www.linkedin.com/in/alelyanit)")
+st.sidebar.markdown("📧 [Contact on LinkedIn](https://www.linkedin.com/in/turki-alelyani)")
 st.sidebar.markdown("---")
 st.sidebar.markdown("Upload a clinical PDF to extract:")
 st.sidebar.markdown("- 🔍 **Summarization**")
@@ -23,7 +23,7 @@ st.sidebar.markdown("ℹ️ This app uses clinical NLP models to process and vis
 # Main UI
 st.title("📄 Medical NLP Pipeline")
 
-# Model selection (not functional in base pipeline, placeholder for extended logic)
+# Model selection (placeholder logic)
 model_name = st.selectbox("Choose summarization model", ["sshleifer/distilbart-cnn-12-6", "facebook/bart-large-cnn", "t5-base"])
 
 uploaded_file = st.file_uploader("Upload a clinical PDF", type="pdf")
@@ -52,16 +52,19 @@ if uploaded_file:
 
         # Embeddings
         st.subheader("📈 Embedding Visualization (PCA)")
-        emb = np.array(result["embeddings"]).reshape(1, -1)
-        if emb.shape[1] > 2:
-            pca = PCA(n_components=2)
-            reduced = pca.fit_transform(emb)
-            fig, ax = plt.subplots()
-            ax.scatter(reduced[:, 0], reduced[:, 1], c='blue')
-            ax.set_title("PCA Projection")
-            st.pyplot(fig)
+        if result["embeddings"] and isinstance(result["embeddings"][0], (float, int)):
+            emb = np.array(result["embeddings"]).reshape(1, -1)
+            if emb.shape[1] > 2:
+                pca = PCA(n_components=2)
+                reduced = pca.fit_transform(emb)
+                fig, ax = plt.subplots()
+                ax.scatter(reduced[:, 0], reduced[:, 1], c='blue')
+                ax.set_title("PCA Projection")
+                st.pyplot(fig)
+            else:
+                st.write("Not enough dimensions to project.")
         else:
-            st.write("Not enough dimensions to project.")
+            st.warning("Embeddings not available or invalid for visualization.")
 
         # Downloadable report
         st.subheader("📄 Download Report")
