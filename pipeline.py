@@ -2,7 +2,7 @@
 import torch
 from transformers import pipeline, AutoTokenizer, AutoModel
 import gc
-from config.settings import Config
+from settings import Config
 
 class OptimizedPipeline:
     def __init__(self):
