@@ -52,7 +52,7 @@ if uploaded_file:
 
         # Embeddings
         st.subheader("📈 Embedding Visualization (PCA)")
-        emb = result["embeddings"].reshape(1, -1)
+        emb = np.array(result["embeddings"]).reshape(1, -1)
         if emb.shape[1] > 2:
             pca = PCA(n_components=2)
             reduced = pca.fit_transform(emb)
