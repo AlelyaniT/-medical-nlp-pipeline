@@ -50,21 +50,23 @@ if uploaded_file:
         st.subheader("🧬 PICO Elements")
         st.json(result["pico"])
 
-        # Embeddings
+        # Embeddings Visualization (safe PCA)
         st.subheader("📈 Embedding Visualization (PCA)")
-        if result["embeddings"] and isinstance(result["embeddings"][0], (float, int)):
+        try:
             emb = np.array(result["embeddings"]).reshape(1, -1)
-            if emb.shape[1] > 2:
+            if emb.shape[0] < 2:
+                st.warning("PCA requires at least 2 samples for projection.")
+            elif emb.shape[1] < 2:
+                st.warning("Not enough embedding dimensions to project.")
+            else:
                 pca = PCA(n_components=2)
                 reduced = pca.fit_transform(emb)
                 fig, ax = plt.subplots()
                 ax.scatter(reduced[:, 0], reduced[:, 1], c='blue')
                 ax.set_title("PCA Projection")
                 st.pyplot(fig)
-            else:
-                st.write("Not enough dimensions to project.")
-        else:
-            st.warning("Embeddings not available or invalid for visualization.")
+        except Exception as e:
+            st.warning(f"⚠️ Unable to project embeddings: {e}")
 
         # Downloadable report
         st.subheader("📄 Download Report")
