@@ -1,6 +1,6 @@
 import streamlit as st
 import pdfplumber
-from app.pipeline import OptimizedPipeline
+from pipeline import OptimizedPipeline
 
 # ------------------------------
 # Sidebar - Branding & Contact
