@@ -4,3 +4,4 @@ torch
 pdfplumber
 scikit-learn
 matplotlib
+langdetect
