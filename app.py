@@ -5,7 +5,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.decomposition import PCA
 from pipeline import OptimizedPipeline
+import os
 
+os.environ["STREAMLIT_SERVER_FILE_WATCHER_TYPE"] = "none"
 st.set_page_config(page_title="Medical NLP", layout="centered")
 st.sidebar.title("🧠 Medical NLP App")
 st.sidebar.markdown("Built by **Dr. Alelyani**") 
