@@ -8,9 +8,8 @@ from pipeline import OptimizedPipeline
 
 st.set_page_config(page_title="Medical NLP", layout="centered")
 st.sidebar.title("🧠 Medical NLP App")
-st.sidebar.markdown("Built by **Dr. Alelyani**")  
-📧 [LinkedIn](https://www.linkedin.com/in/alelyanit)")
-
+st.sidebar.markdown("Built by **Dr. Alelyani**") 
+st.sidebar.markdown("📬 [LinkedIn](https://www.linkedin.com/in/alelyanit)")
 st.title("📄 Medical NLP Pipeline")
 uploaded_file = st.file_uploader("Upload a clinical PDF", type="pdf")
 
