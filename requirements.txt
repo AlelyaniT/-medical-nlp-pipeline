@@ -1,7 +1,8 @@
 streamlit
+pdfplumber
+numpy
+matplotlib
+scikit-learn
 transformers
 torch
-pdfplumber
-scikit-learn
-matplotlib
 langdetect
